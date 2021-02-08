@@ -1,0 +1,71 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Ikasle {
+
+	private String izen;
+	private String abizen;
+	private String eposta;
+	private double azterketaNota;
+	private String herrialde;
+	private List<Entregagarri> entregagarriZerr = new ArrayList<Entregagarri>() ;
+
+	public Ikasle(String pIzen, String pAbizen, String pEposta,  String pHerrialde)
+	{
+		izen = pIzen;
+		abizen = pAbizen;
+		eposta = pEposta;
+		herrialde = pHerrialde;
+		
+	}
+	/////GETTERRAK//////
+	
+	public String getIzen(){return izen;}
+	public String getAbizen(){return abizen;}
+	public String getHerrialde(){return herrialde;}
+	
+	///////////////////	
+	
+	public void addEntregagarri(Entregagarri pEnt){
+		entregagarriZerr.add(pEnt);
+	}
+	
+	public void setNota(double pNota) {
+		azterketaNota = pNota;
+	}
+	
+	public String toString(){
+		return "Izen-abizenak: " + izen + " " + abizen + ", eposta: " + eposta; 
+	}
+	
+	////////////////////////////JAVA8////////////////////////////////	
+	
+
+	public boolean gaindituDu() {
+		return notaFinalaKalkulatu() >= 5.0;
+	}
+	 
+	public double entregagarrienNotaKalkulatu(){
+		//TODO 1. ariketa
+		var unekoa=entregagarriZerr.stream().mapToDouble(elem-> elem.getNota()*0.4).average();
+		return unekoa.orElse(0.0);
+	}
+	
+	public double notaFinalaKalkulatu(){
+		//TODO 2. ariketa
+		double entreEmaitza=entregagarrienNotaKalkulatu();
+		return entreEmaitza+azterketaNota*0.6;
+	}
+	
+	public boolean entregagarriGuztiakGaindituDitu(){
+		//TODO 3. ariketa
+		return entregagarriZerr.stream().allMatch(elem->elem.getNota()>=5.0);
+	}
+	
+	
+	public boolean entregagarrietakoBatekNotaGaindituDu(double pNota){
+		//TODO 4. ariketa
+		return entregagarriZerr.stream().anyMatch(elem->elem.getNota()>=pNota);
+	}
+}
