@@ -47,25 +47,21 @@ public class Ikasle {
 	}
 	 
 	public double entregagarrienNotaKalkulatu(){
-		//TODO 1. ariketa
 		var unekoa=entregagarriZerr.stream().mapToDouble(elem-> elem.getNota()*0.4).average();
 		return unekoa.orElse(0.0);
 	}
 	
 	public double notaFinalaKalkulatu(){
-		//TODO 2. ariketa
 		double entreEmaitza=entregagarrienNotaKalkulatu();
 		return entreEmaitza+azterketaNota*0.6;
 	}
 	
 	public boolean entregagarriGuztiakGaindituDitu(){
-		//TODO 3. ariketa
 		return entregagarriZerr.stream().allMatch(elem->elem.getNota()>=5.0);
 	}
 	
 	
 	public boolean entregagarrietakoBatekNotaGaindituDu(double pNota){
-		//TODO 4. ariketa
 		return entregagarriZerr.stream().anyMatch(elem->elem.getNota()>=pNota);
 	}
 }
