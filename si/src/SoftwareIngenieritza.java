@@ -112,23 +112,31 @@ public class SoftwareIngenieritza{
 	}
 
 	public Map<String,Double> batazbestekoNotakHerrialdekaLortu(){
-		//TODO  16. ariketa
 		return matrikulatuZerr.stream()
-				.collect(groupingBy(Ikasle::getHerrialde), Collectors.averagingDouble(Ikasle::notaFinalaKalkulatu)); //String=Herrialdea
+				.collect(groupingBy(Ikasle::getHerrialde,
+						Collectors.averagingDouble(Ikasle::notaFinalaKalkulatu))
+				); //String=Herrialdea
 	}
 
 	public Map<String,Ikasle> notaMaximodunIkasleaHerrialdekaLortu(){
-		//TODO  17. ariketa
-		var lam= matrikulatuZerr.stream()
-				.collect(groupingBy(Ikasle::getHerrialde),
+		return matrikulatuZerr.stream()
+				.collect(groupingBy(Ikasle::getHerrialde,
 						Collectors.collectingAndThen(
 								maxBy(Comparator.comparing(Ikasle::notaFinalaKalkulatu)),
-
-						));
+								elem->elem.isPresent()?elem.get() : new Ikasle("a","a","a","a") //ez badago elementurik a a a a datuko ikaslea sartuko da xdn't
+						)
+				));
 	}
 	
 	public Map<String,Double> notaMaximoaHerrialdekaLortu(){
-		//TODO  18. ariketa			
+		return matrikulatuZerr.stream()
+				.collect(groupingBy(Ikasle::getHerrialde,
+						Collectors.collectingAndThen(
+								maxBy(Comparator.comparing(Ikasle::notaFinalaKalkulatu)),
+								elem->elem.isPresent()?elem.get().notaFinalaKalkulatu() : new Double(0.0)
+						)
+				));
+
 	}
 
 }
