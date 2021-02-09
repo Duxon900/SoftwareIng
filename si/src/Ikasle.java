@@ -47,12 +47,14 @@ public class Ikasle {
 	}
 	 
 	public double entregagarrienNotaKalkulatu(){
-		var unekoa=entregagarriZerr.stream().mapToDouble(elem-> elem.getNota()*0.4).average();
-		return unekoa.orElse(0.0);
+		return entregagarriZerr.stream() //sekuentzialki analizatu
+				.mapToDouble(Entregagarri::getNota) //elementu bakoitzeko
+				.average() //guztien batez bestekoa atera
+				.orElse(0.0); //hutsik balego 0.0 balioz ordezkatu
 	}
 	
 	public double notaFinalaKalkulatu(){
-		double entreEmaitza=entregagarrienNotaKalkulatu();
+		double entreEmaitza=entregagarrienNotaKalkulatu()*0.4;
 		return entreEmaitza+azterketaNota*0.6;
 	}
 	

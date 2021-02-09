@@ -11,7 +11,7 @@ import java.util.stream.*;
 import static java.util.Comparator.*;
 import static java.util.stream.Collectors.*;
 
-public class SoftwareIngenieritza {
+public class SoftwareIngenieritza{
 	
 	private static SoftwareIngenieritza nSoftwareIngenieritza;
 	private List<Ikasle> matrikulatuZerr = new ArrayList<>();
@@ -25,7 +25,7 @@ public class SoftwareIngenieritza {
 		}
 		return nSoftwareIngenieritza;
 	}
-	
+
 	public void addIkasle(Ikasle pIk)
 	{
 		matrikulatuZerr.add(pIk);
@@ -40,59 +40,95 @@ public class SoftwareIngenieritza {
 	
 
 	public void notaTotalakErakutsi(){
-		//TODO  5. ariketa
+		matrikulatuZerr.forEach(elem-> System.out.println(elem.notaFinalaKalkulatu()));
 	}
 	
 	public List<Ikasle> gainditutakoakLortu(){
-		//TODO  6. ariketa
+		return matrikulatuZerr.stream().filter(elem->elem.notaFinalaKalkulatu()>=5.0).collect(toList());
+		//toList()
 	}
 
 	public List<Ikasle> gainditutakoakIzenezOrdenatutaLortu(){
-		//TODO  7. ariketa
+		return matrikulatuZerr.stream() //sekuentzialki analizatu
+				.filter(elem->elem.notaFinalaKalkulatu()>=5.0) //5.0 baino handiagoko notak sartu
+				.sorted(Comparator.comparing(Ikasle::getIzen)) //izenaz ordenatu
+				.collect(toList());
 	}
 
 	public List<Ikasle> gainditutakoakIzenezAbizenezOrdenatutaLortu(){
-		//TODO  8. ariketa
+		return matrikulatuZerr.stream() //sekuentzialki analizatu
+				.filter(elem->elem.notaFinalaKalkulatu()>=5.0) //5.0 baino handiagoko notak sartu
+				.sorted(comparing(Ikasle::getIzen).thenComparing(Ikasle::getAbizen)) //izenaz ordenatu
+				.collect(toList());
 	}
 	
 	public double gaindituenPortzentaiaLortu(){
-		//TODO  9. ariketa
+		var ema= matrikulatuZerr.stream()
+				.filter(elem->elem.notaFinalaKalkulatu()>=5.0)
+				.count();
+		return (double) ema/matrikulatuZerr.size()*100;
 	}
 
 	public List<String> herrialdeakLortu(){
-		//TODO  10. ariketa
+		return matrikulatuZerr.stream()
+				.map(Ikasle::getHerrialde) //stringen fluxua lortu
+				.distinct() //elementu bat bakoitzeko
+				.collect(toList());
 	}
 	
 
 	public List<Ikasle> entregagarriGuztiakGainditutakoakLortu(){
-		//TODO  11. ariketa	
+		return matrikulatuZerr.stream()
+				.filter(Ikasle::entregagarriGuztiakGaindituDitu)
+				.collect(toList());
 	}
 	
 	public List<Ikasle> entregagarrianNotaGainditzenDutenIkasleakLortu(double pNota){
-		//TODO  12. ariketa
+		return matrikulatuZerr.stream()
+				.filter(elem->elem.entregagarrietakoBatekNotaGaindituDu(pNota))
+				.collect(toList());
 	}
 
 	public void ikasleenEstatiskikakInprimatu() {
-		//TODO  13. ariketa
+		var doubleSummaryStatistics=matrikulatuZerr.stream()
+				.mapToDouble(Ikasle::notaFinalaKalkulatu)
+				.summaryStatistics();
+		System.out.println(
+				"{\"max\":"+doubleSummaryStatistics.getMax()+
+				",\"min\":"+doubleSummaryStatistics.getMin()+
+				",\"average\":"+doubleSummaryStatistics.getAverage()+"}"
+		);
 	}
 	
 	public Map<Boolean,List<Ikasle>> gaindituakSuspendituakLortu(){
-		//TODO  14. ariketa
+		return matrikulatuZerr.stream()
+				.collect(partitioningBy(Ikasle::gaindituDu)); //partitioningBy -> Map<Boolean, Object>
 	}
 	
 	public Map<String,List<Ikasle>> ikasleakHerrialdekaLortu(){
-		//TODO  15. ariketa
+		return matrikulatuZerr.stream()
+				.collect(groupingBy(Ikasle::getHerrialde)); //String=Herrialdea
+
 	}
 
 	public Map<String,Double> batazbestekoNotakHerrialdekaLortu(){
 		//TODO  16. ariketa
+		return matrikulatuZerr.stream()
+				.collect(groupingBy(Ikasle::getHerrialde), Collectors.averagingDouble(Ikasle::notaFinalaKalkulatu)); //String=Herrialdea
 	}
 
 	public Map<String,Ikasle> notaMaximodunIkasleaHerrialdekaLortu(){
 		//TODO  17. ariketa
+		var lam= matrikulatuZerr.stream()
+				.collect(groupingBy(Ikasle::getHerrialde),
+						Collectors.collectingAndThen(
+								maxBy(Comparator.comparing(Ikasle::notaFinalaKalkulatu)),
+
+						));
 	}
 	
 	public Map<String,Double> notaMaximoaHerrialdekaLortu(){
 		//TODO  18. ariketa			
 	}
+
 }
