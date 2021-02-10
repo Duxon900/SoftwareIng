@@ -1,12 +1,6 @@
+package nagusi;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.DoubleSummaryStatistics;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.*;
 import static java.util.Comparator.*;
 import static java.util.stream.Collectors.*;
@@ -63,8 +57,8 @@ public class SoftwareIngenieritza{
 	}
 	
 	public double gaindituenPortzentaiaLortu(){
-		var ema= matrikulatuZerr.stream()
-				.filter(elem->elem.notaFinalaKalkulatu()>=5.0)
+		long ema = matrikulatuZerr.stream()
+				.filter(elem -> elem.notaFinalaKalkulatu() >= 5.0)
 				.count();
 		return (double) ema/matrikulatuZerr.size()*100;
 	}
@@ -90,7 +84,7 @@ public class SoftwareIngenieritza{
 	}
 
 	public void ikasleenEstatiskikakInprimatu() {
-		var doubleSummaryStatistics=matrikulatuZerr.stream()
+		DoubleSummaryStatistics doubleSummaryStatistics = matrikulatuZerr.stream()
 				.mapToDouble(Ikasle::notaFinalaKalkulatu)
 				.summaryStatistics();
 		System.out.println(

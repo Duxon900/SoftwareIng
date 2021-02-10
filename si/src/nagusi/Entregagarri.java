@@ -1,3 +1,5 @@
+package nagusi;
+
 public class Entregagarri {
 
 	private String enunciado;
