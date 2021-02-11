@@ -38,8 +38,12 @@ public class SoftwareIngenieritza{
 	}
 	
 	public List<Ikasle> gainditutakoakLortu(){
-		return matrikulatuZerr.stream().filter(elem->elem.notaFinalaKalkulatu()>=5.0).collect(toList());
+		List<Ikasle> lista= matrikulatuZerr.stream().filter(elem->elem.notaFinalaKalkulatu()>=5.0).collect(toList());
 		//toList()
+
+		System.out.println(lista);
+
+		return lista;
 	}
 
 	public List<Ikasle> gainditutakoakIzenezOrdenatutaLortu(){
