@@ -41,7 +41,9 @@ public class SoftwareIngenieritza{
 		List<Ikasle> lista= matrikulatuZerr.stream().filter(elem->elem.notaFinalaKalkulatu()>=5.0).collect(toList());
 		//toList()
 
-		System.out.println(lista);
+		lista.forEach(
+					p-> System.out.println(p.getIzen()+" "+p.getAbizen()
+				));
 
 		return lista;
 	}

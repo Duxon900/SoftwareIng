@@ -34,7 +34,10 @@ class SoftwareIngenieritzaTest {
         List<Ikasle> lista=new ArrayList<>();
         assertEquals(lista.size(),si.gainditutakoakLortu().size()); //lista hutsa denean
 
-
+        ikElemBakarra.setNota(7.5);
+        ikHutsa.setNota(3.0);
+        //lista.add()
+        
     }
 
     @Test
