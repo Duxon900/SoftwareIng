@@ -34,57 +34,18 @@ class SoftwareIngenieritzaTest {
         List<Ikasle> lista=new ArrayList<>();
         assertEquals(lista.size(),si.gainditutakoakLortu().size()); //lista hutsa denean
 
+        //gainditu
         ikElemBakarra.setNota(7.5);
+        entregagarriBetea.setNota(8.0);
+        ikElemBakarra.addEntregagarri(entregagarriBetea);
+
+        //penkatu
         ikHutsa.setNota(3.0);
-        //lista.add()
+
+        si.addIkasle(ikElemBakarra);
+        si.addIkasle(ikHutsa);
+
+        assertEquals(1,si.gainditutakoakLortu().size());
         
-    }
-
-    @Test
-    void gainditutakoakIzenezOrdenatutaLortu() {
-    }
-
-    @Test
-    void gainditutakoakIzenezAbizenezOrdenatutaLortu() {
-    }
-
-    @Test
-    void gaindituenPortzentaiaLortu() {
-    }
-
-    @Test
-    void herrialdeakLortu() {
-    }
-
-    @Test
-    void entregagarriGuztiakGainditutakoakLortu() {
-    }
-
-    @Test
-    void entregagarrianNotaGainditzenDutenIkasleakLortu() {
-    }
-
-    @Test
-    void ikasleenEstatiskikakInprimatu() {
-    }
-
-    @Test
-    void gaindituakSuspendituakLortu() {
-    }
-
-    @Test
-    void ikasleakHerrialdekaLortu() {
-    }
-
-    @Test
-    void batazbestekoNotakHerrialdekaLortu() {
-    }
-
-    @Test
-    void notaMaximodunIkasleaHerrialdekaLortu() {
-    }
-
-    @Test
-    void notaMaximoaHerrialdekaLortu() {
     }
 }
