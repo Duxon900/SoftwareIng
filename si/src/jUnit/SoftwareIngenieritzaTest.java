@@ -1,6 +1,5 @@
 package jUnit;
 
-import nagusi.Entregagarri;
 import nagusi.Ikasle;
 import nagusi.SoftwareIngenieritza;
 import org.junit.jupiter.api.BeforeEach;
