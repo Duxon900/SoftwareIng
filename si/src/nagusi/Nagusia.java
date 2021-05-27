@@ -5,7 +5,6 @@ import java.util.Map;
 public class Nagusia {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Estazio e1 = new Estazio("a", 1);
 		Estazio e2 = new Estazio("b", 2);
 		Estazio e3 = new Estazio("c", 3);
